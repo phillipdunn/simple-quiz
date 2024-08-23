@@ -1,18 +1,21 @@
 import React, { FC } from 'react';
 import { Formik, Form as FormikForm, } from 'formik';
 import { Box, Button, TextField, } from '@mui/material';
-import { schema } from '../../helpers/validation';
+
 
 interface Props {
     buttonLabel: string
     handleSubmit: () => void
+    isRegister?: boolean
+    schema: any
 }
-const Form: FC<Props> = ({ buttonLabel, handleSubmit }) => {
+const Form: FC<Props> = ({ buttonLabel, handleSubmit, isRegister, schema }) => {
 
     const initialValues = {
-        firstName: '',
-        lastName: '',
+        ...(isRegister && { firstName: '' }),
+        ...(isRegister && { lastName: '' }),
         email: '',
+        password: ''
     };
 
     return (
@@ -25,7 +28,7 @@ const Form: FC<Props> = ({ buttonLabel, handleSubmit }) => {
             {({ errors, handleChange, handleSubmit }) => (
                 <FormikForm noValidate onSubmit={handleSubmit}>
                     <Box sx={{ pt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <TextField
+                        {isRegister && <><TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="text"
                             name='firstName'
@@ -35,16 +38,16 @@ const Form: FC<Props> = ({ buttonLabel, handleSubmit }) => {
                             error={!!errors.firstName}
                             helperText={errors.firstName ? errors.firstName : ''}
                         />
-                        <TextField
-                            style={{ width: "200px", margin: "5px" }}
-                            type="text"
-                            name='lastName'
-                            label="Last Name"
-                            variant="outlined"
-                            onChange={handleChange}
-                            error={!!errors.lastName}
-                            helperText={errors.lastName ? errors.lastName : ''}
-                        />
+                            <TextField
+                                style={{ width: "200px", margin: "5px" }}
+                                type="text"
+                                name='lastName'
+                                label="Last Name"
+                                variant="outlined"
+                                onChange={handleChange}
+                                error={!!errors.lastName}
+                                helperText={errors.lastName ? errors.lastName : ''}
+                            /></>}
                         <TextField
                             style={{ width: "200px", margin: "5px" }}
                             type="email"
@@ -54,6 +57,16 @@ const Form: FC<Props> = ({ buttonLabel, handleSubmit }) => {
                             onChange={handleChange}
                             error={!!errors.email}
                             helperText={errors.email ? errors.email : ''}
+                        />
+                        <TextField
+                            style={{ width: "200px", margin: "5px" }}
+                            type="password"
+                            name='password'
+                            label="Password"
+                            variant="outlined"
+                            onChange={handleChange}
+                            error={!!errors.password}
+                            helperText={errors.password ? errors.password : ''}
                         />
                         <Box sx={{ pt: 3 }}>
                             <Button variant="contained" color="primary" type='submit'>
