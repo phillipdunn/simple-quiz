@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
 import Register from './pages/Register';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
