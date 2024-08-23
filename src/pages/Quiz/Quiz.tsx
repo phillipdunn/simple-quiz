@@ -5,6 +5,7 @@ import { Box, Button } from '@mui/material';
 import TypeWritter from '../../components/TypeWritter/TypeWritter';
 import { Answers, QuestionType } from '../../types/questions';
 import { useNavigate } from 'react-router-dom';
+import { capitaliseFirstLetter } from '../../helpers/capitaliseFirstLetter';
 
 const Quiz = () => {
     const [questions, setQuestions] = useState<QuestionType[]>([]);
@@ -27,7 +28,6 @@ const Quiz = () => {
         if (!gameOver) {
             console.log(anwser);
             const correctAnswer = questions[number].options.find((option) => option.isCorrect);
-            console.log(correctAnswer);
             setUserAnswers((prevAnswers) => [
                 ...prevAnswers,
                 { question: questions[number].question, answer: anwser, correct: anwser === correctAnswer?.answer },
@@ -51,7 +51,7 @@ const Quiz = () => {
             <Box sx={{ backgroundColor: 'white', height: '500px', width: '1000px', borderRadius: '8px', pt: 4 }}>
                 {gameOver ?
                     (<>
-                        <TypeWritter text={`Hi ${user.firstName}, are you ready to begin the quiz?`} typographyVariant='h4' />
+                        <TypeWritter text={`Hi ${capitaliseFirstLetter(user.firstName)}, are you ready to begin the quiz?`} typographyVariant='h4' />
                         <Button
                             sx={{ mt: 2 }}
                             variant="contained"
