@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { quizQuestions } from '../../helpers/questions'
 import Card from '../../components/Card'
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import TypeWritter from '../../components/TypeWritter/TypeWritter';
 import { Answers, QuestionType } from '../../types/questions';
 import { useNavigate } from 'react-router-dom';
@@ -47,21 +47,23 @@ const Quiz = () => {
 
     return (
 
-        <>
-            {gameOver ?
-                (<>
-                    <TypeWritter text={`Hi ${user.firstName}, are you ready to begin the quiz?`} typographyVariant='h4' />
-                    <Button
-                        sx={{ mt: 2 }}
-                        variant="contained"
-                        color="primary"
-                        onClick={() => startTrivia()}>
-                        Begin the Quiz
-                    </Button>
-                </>
-                ) : (<Card question={questions[number]} checkAnswer={checkAnswer} />)
-            }
-        </>
+        <Box className='quizContainer' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+            <Box sx={{ backgroundColor: 'white', height: '500px', width: '1000px', borderRadius: '8px', pt: 4 }}>
+                {gameOver ?
+                    (<>
+                        <TypeWritter text={`Hi ${user.firstName}, are you ready to begin the quiz?`} typographyVariant='h4' />
+                        <Button
+                            sx={{ mt: 2 }}
+                            variant="contained"
+                            color="primary"
+                            onClick={() => startTrivia()}>
+                            Begin the Quiz
+                        </Button>
+                    </>
+                    ) : (<Card question={questions[number]} checkAnswer={checkAnswer} />)
+                }
+            </Box>
+        </Box>
     )
 }
 

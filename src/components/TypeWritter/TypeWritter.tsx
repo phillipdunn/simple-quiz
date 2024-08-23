@@ -8,8 +8,9 @@ interface Props {
     onFinish?: () => void | undefined
     delay?: number
     typographyVariant?: string
+    sx?: any
 }
-const TypeWritter: FC<Props> = ({ text, onFinish, delay = 100, typographyVariant = 'Body1' }) => {
+const TypeWritter: FC<Props> = ({ text, onFinish, delay = 100, typographyVariant = 'Body1', ...sx }) => {
     const to = useRef<NodeJS.Timeout | undefined>(undefined)
     const [charIndex, setCharIndex] = useState<any>(1)
 
@@ -23,7 +24,7 @@ const TypeWritter: FC<Props> = ({ text, onFinish, delay = 100, typographyVariant
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [charIndex])
 
-    return <Typography variant={typographyVariant as Variant}>{text.substring(0, charIndex)}</Typography>
+    return <Typography variant={typographyVariant as Variant} {...sx}>{text.substring(0, charIndex)}</Typography>
 }
 
 export default TypeWritter
